@@ -23,7 +23,7 @@ const frameMetadata = getFrameMetadata({
     src: `${NEXT_PUBLIC_URL}/frame-1-forest.webp`,
     aspectRatio: '1:1',
   },
-  state: {frame: "start"},
+  state: { serialized: { frame: "start" } },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
