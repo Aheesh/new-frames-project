@@ -405,10 +405,7 @@ addHyperFrame('desert-oasis', {
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log("Frame endpoint");
-  const url = new URL(req.url);
-  const queryParams = url.searchParams;
-  const frame = queryParams.get('frame');
-
+  
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
 
@@ -422,6 +419,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (message?.input) {
     text = message.input;
   }
+
+  const state = message?.state;
+  console.log(state);
+  const frame = "start";
 
   // TODO: Cleanup this error handling
   if (!frame) {
