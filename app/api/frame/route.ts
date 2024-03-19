@@ -431,7 +431,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const frame = state.frame;
-  console.log("state", state);
+  console.log("state", message.state);
   console.log("frame", frame);
 
   // TODO: Cleanup this error handling
