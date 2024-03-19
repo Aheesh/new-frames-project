@@ -414,15 +414,25 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[0];
+  } else {
+    return new NextResponse('Message not valid', { status: 500 });
   }
 
   if (message?.input) {
     text = message.input;
   }
 
-  const state = message?.state;
-  console.log(state);
-  const frame = "start";
+  let state = {frame: "start"};
+  
+  try {
+    state = JSON.parse(decodeURIComponent(message.state?.serialized));
+  } catch (e) {
+    console.error(e);
+  }
+
+  const frame = state.frame;
+  console.log("state", state);
+  console.log("frame", frame);
 
   // TODO: Cleanup this error handling
   if (!frame) {
