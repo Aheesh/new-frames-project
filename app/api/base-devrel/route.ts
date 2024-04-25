@@ -345,12 +345,27 @@ function isFidPresent(followers: Follow[], fidToCheck: number): boolean {
 }
 
 async function checkFollowers(fid: number): Promise<followingDevRel> {
+
+
   const following: followingDevRel = {
     brian: false,
     ryan: false,
     taylor: false,
     will: false,
   };
+
+  if (fid === devRelFIDs.brian) {
+    following.brian = true;
+  }
+  if (fid === devRelFIDs.ryan) {
+    following.ryan = true;
+  }
+  if (fid === devRelFIDs.taylor) {
+    following.taylor = true;
+  }
+  if (fid === devRelFIDs.will) {
+    following.will = true;
+  }
 
   const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${fid}&viewer_fid=${fid}`;
 
