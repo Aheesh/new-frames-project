@@ -15,7 +15,7 @@ const frameMetadata = getFrameMetadata({
     },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/base-devrel/mountain.webp`,
+    src: `${NEXT_PUBLIC_URL}/base-devrel/path.webp`,
     aspectRatio: '1:1',
   },
   state: { frame: 'start' },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Meet Base DevRel',
     description: 'Follow us for the latest builder updates!',
-    images: [`${NEXT_PUBLIC_URL}/base-devrel/mountain.webp`],
+    images: [`${NEXT_PUBLIC_URL}/base-devrel/path.webp`],
   },
   other: {
     ...frameMetadata,
