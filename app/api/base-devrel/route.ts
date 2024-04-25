@@ -140,22 +140,22 @@ addHyperFrame('sea-no-turtle', {
       {
         action: 'link',
         label: 'Follow Will',
-        target: devRelLinks.will
+        target: devRelLinks.will,
       },
       {
         label: 'Back',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/no-turtle.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'sea' },
+    state: { frame: 'sea-no-turtle' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: (text: string) => {
     return JSON.parse(text).will ? 'sea' : 'sea-no-turtle';
-    },
+  },
   3: 'seaside',
 });
 
@@ -185,22 +185,22 @@ addHyperFrame('fire-station-no-dalmatian', {
       {
         action: 'link',
         label: 'Follow Taylor',
-        target: devRelLinks.taylor
+        target: devRelLinks.taylor,
       },
       {
         label: 'Back',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/no-dalmatian.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'fire-station' },
+    state: { frame: 'fire-station-no-dalmatian' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: (text: string) => {
     return JSON.parse(text).taylor ? 'fire-station' : 'fire-station-no-dalmatian';
-    },
+  },
   3: 'seaside',
 });
 
@@ -259,22 +259,22 @@ addHyperFrame('no-leopard', {
       {
         action: 'link',
         label: 'Follow Ryan',
-        target: devRelLinks.ryan
+        target: devRelLinks.ryan,
       },
       {
         label: 'Back',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/no-leopard.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'mountains' },
+    state: { frame: 'no-leopard' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: (text: string) => {
     return JSON.parse(text).ryan ? 'with-leopard' : 'no-leopard';
-    },
+  },
   3: 'mountains',
 });
 
@@ -283,13 +283,13 @@ addHyperFrame('with-leopard', {
     buttons: [
       {
         label: 'You follow Ryan!',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/with-leopard.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'mountains' },
+    state: { frame: 'with-leopard' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: 'mountains',
@@ -304,22 +304,22 @@ addHyperFrame('no-falcon', {
       {
         action: 'link',
         label: 'Follow Brian',
-        target: devRelLinks.brian
+        target: devRelLinks.brian,
       },
       {
         label: 'Back',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/no-falcon.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'mountains' },
+    state: { frame: 'no-falcon' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: (text: string) => {
     return JSON.parse(text).brian ? 'with-falcon' : 'no-falcon';
-    },
+  },
   3: 'mountains',
 });
 
@@ -328,13 +328,13 @@ addHyperFrame('with-falcon', {
     buttons: [
       {
         label: 'You follow Brian!',
-      }
+      },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/base-devrel/with-falcon.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'mountains' },
+    state: { frame: 'with-falcon' },
     postUrl: `${NEXT_PUBLIC_URL}/api/base-devrel`,
   }),
   1: 'mountains',
@@ -398,6 +398,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   text = JSON.stringify(following);
+  console.log('following', following);
 
   let state = { frame: 'start' };
 
@@ -413,7 +414,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   // TODO: Cleanup this error handling
   if (!frame) {
-    return new NextResponse('Frame not found', { status: 404 });
+    return new NextResponse(`Frame not found ${frame}`, { status: 404 });
   }
 
   // There should always be a button number

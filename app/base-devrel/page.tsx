@@ -42,7 +42,6 @@ export default function Page() {
       <a href="https://docs.base.org/building-with-base/guides/hyperframes">
         Click here to learn how to make this!
       </a>
-      <img src={`${NEXT_PUBLIC_URL}/base-devrel/path.webp`} alt="Base DevRel" />
     </>
   );
 }
