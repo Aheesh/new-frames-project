@@ -344,31 +344,13 @@ function isFidPresent(followers: Follow[], fidToCheck: number): boolean {
   return followers.some(follower => follower.user.fid === fidToCheck);
 }
 
-async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('Frame endpoint');
-
+async function checkFollowers(fid: number): Promise<followingDevRel> {
   const following: followingDevRel = {
     brian: false,
     ryan: false,
     taylor: false,
     will: false,
   };
-
-  let accountAddress: string | undefined = '';
-  let fid: number | undefined = 0;
-
-  // @dev using text here to signal followers to hyperframes
-  let text: string | undefined = '';
-
-  const body: FrameRequest = await req.json();
-  const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
-
-  if (isValid) {
-    accountAddress = message.interactor.verified_accounts[0];
-    fid = message.interactor.fid;
-  } else {
-    return new NextResponse('Message not valid', { status: 500 });
-  }
 
   const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${fid}&viewer_fid=${fid}`;
 
@@ -400,6 +382,30 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(`Error fetching reactions from neynar`);
     console.error(response);
   }
+
+  return following;
+}
+
+async function getResponse(req: NextRequest): Promise<NextResponse> {
+  console.log('Frame endpoint');
+
+  let accountAddress: string | undefined = '';
+  let fid: number | undefined = 0;
+
+  // @dev using text here to signal followers to hyperframes
+  let text: string | undefined = '';
+
+  const body: FrameRequest = await req.json();
+  const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
+
+  if (isValid) {
+    accountAddress = message.interactor.verified_accounts[0];
+    fid = message.interactor.fid;
+  } else {
+    return new NextResponse('Message not valid', { status: 500 });
+  }
+
+  const following = await checkFollowers(fid);
 
   text = JSON.stringify(following);
   console.log('following', following);
