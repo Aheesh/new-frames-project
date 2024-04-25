@@ -385,6 +385,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (response.ok) {
     const followsJson = await response.json();
+    console.log('followsJson', followsJson);
     const relevantFollowers = followsJson?.all_relevant_followers_dehydrated;
     console.log('relevantFollowers', relevantFollowers);
     if (relevantFollowers) {
