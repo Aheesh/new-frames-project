@@ -354,19 +354,6 @@ async function checkFollowers(fid: number): Promise<followingDevRel> {
     will: false,
   };
 
-  if (fid === devRelFIDs.brian) {
-    following.brian = true;
-  }
-  if (fid === devRelFIDs.ryan) {
-    following.ryan = true;
-  }
-  if (fid === devRelFIDs.taylor) {
-    following.taylor = true;
-  }
-  if (fid === devRelFIDs.will) {
-    following.will = true;
-  }
-
   const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${fid}&viewer_fid=${fid}`;
 
   const options = {
@@ -391,7 +378,20 @@ async function checkFollowers(fid: number): Promise<followingDevRel> {
       following.ryan = isFidPresent(relevantFollowers, devRelFIDs.ryan);
       following.taylor = isFidPresent(relevantFollowers, devRelFIDs.taylor);
       following.will = isFidPresent(relevantFollowers, devRelFIDs.will);
-      console.log('following in response.ok', following);
+    }
+
+    // Handle edge case because we don't follow ourselves
+    if (fid === devRelFIDs.brian) {
+      following.brian = true;
+    }
+    if (fid === devRelFIDs.ryan) {
+      following.ryan = true;
+    }
+    if (fid === devRelFIDs.taylor) {
+      following.taylor = true;
+    }
+    if (fid === devRelFIDs.will) {
+      following.will = true;
     }
   } else {
     console.error(`Error fetching reactions from neynar`);
