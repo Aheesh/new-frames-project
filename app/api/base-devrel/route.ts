@@ -355,6 +355,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   };
 
   let accountAddress: string | undefined = '';
+  let fid: number | undefined = 0;
 
   // @dev using text here to signal followers to hyperframes
   let text: string | undefined = '';
@@ -364,11 +365,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[0];
+    fid = message.interactor.fid;
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${accountAddress}&viewer_fid=${accountAddress}`;
+  const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${fid}&viewer_fid=${fid}`;
 
   const options = {
     method: 'GET',
