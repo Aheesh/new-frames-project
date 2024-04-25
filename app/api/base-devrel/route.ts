@@ -33,7 +33,7 @@ const devRelFIDs = {
 
 interface User {
   object: string;
-  fid: string;
+  fid: number;
 }
 
 interface Follow {
@@ -341,7 +341,7 @@ addHyperFrame('with-falcon', {
 });
 
 function isFidPresent(followers: Follow[], fidToCheck: number): boolean {
-    return followers.some(follower => follower.user.fid === fidToCheck.toString());
+  return followers.some(follower => follower.user.fid === fidToCheck);
 }
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -387,7 +387,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (response.ok) {
     const followsJson = await response.json();
-    console.log('followsJson', followsJson);
     const relevantFollowers = followsJson?.all_relevant_followers_dehydrated;
     console.log('relevantFollowers', relevantFollowers);
     if (relevantFollowers) {
@@ -395,6 +394,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       following.ryan = isFidPresent(relevantFollowers, devRelFIDs.ryan);
       following.taylor = isFidPresent(relevantFollowers, devRelFIDs.taylor);
       following.will = isFidPresent(relevantFollowers, devRelFIDs.will);
+      console.log('following in response.ok', following);
     }
   } else {
     console.error(`Error fetching reactions from neynar`);
