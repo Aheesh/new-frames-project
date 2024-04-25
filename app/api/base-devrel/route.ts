@@ -33,7 +33,7 @@ const devRelFIDs = {
 
 interface User {
   object: string;
-  fid: number;
+  fid: string;
 }
 
 interface Follow {
@@ -341,7 +341,7 @@ addHyperFrame('with-falcon', {
 });
 
 function isFidPresent(followers: Follow[], fidToCheck: number): boolean {
-    return followers.some(follower => follower.user.fid === fidToCheck);
+    return followers.some(follower => follower.user.fid === fidToCheck.toString());
 }
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
