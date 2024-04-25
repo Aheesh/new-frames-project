@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>Meet Base DevRel</h1>
+      <h1>Meet Base the Base DevRel Team</h1>
       <a href="https://docs.base.org/building-with-base/guides/hyperframes">
         Click here to learn how to make this!
       </a>
