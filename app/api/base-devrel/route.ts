@@ -2,6 +2,7 @@ import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/o
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 import { addHyperFrame, getHyperFrame } from '../../hyperframes';
+import { NeynarUser } from '../../constant';
 
 const devRelLinks = {
   brian: 'https://warpcast.com/briandoyle81',
@@ -30,16 +31,6 @@ const devRelFIDs = {
   taylor: 192279,
   will: 12144,
 };
-
-interface User {
-  object: string;
-  fid: number;
-}
-
-interface Follow {
-  object: string;
-  user: User;
-}
 
 addHyperFrame('start', {
   frame: getFrameHtmlResponse({
@@ -340,12 +331,23 @@ addHyperFrame('with-falcon', {
   1: 'mountains',
 });
 
-function isFidPresent(followers: Follow[], fidToCheck: number): boolean {
-  return followers.some(follower => follower.user.fid === fidToCheck);
+function createEncodedFIDString(fids: { [key: string]: number }): string {
+  // Extract values from the object and join them with a comma
+  const fidString = Object.values(fids).join(', ');
+
+  // Encode the resulting string to make it URL-safe
+  return encodeURIComponent(fidString);
+}
+
+function isFollowedBy(users: NeynarUser[], fidToCheck: number): boolean {
+  // Find the user with the specific fid
+  const user = users.find((user) => user.fid === fidToCheck);
+
+  // Return true if the user is found and followed_by is true, otherwise false
+  return user ? user.viewer_context.followed_by : false;
 }
 
 async function checkFollowers(fid: number): Promise<followingDevRel> {
-
 
   const following: followingDevRel = {
     brian: false,
@@ -354,7 +356,7 @@ async function checkFollowers(fid: number): Promise<followingDevRel> {
     will: false,
   };
 
-  const API_URL = `https://api.neynar.com/v2/farcaster/followers/relevant?target_fid=${fid}&viewer_fid=${fid}`;
+  const API_URL = `https://api.neynar.com/v2/farcaster/user/bulk?fids=${createEncodedFIDString(devRelFIDs)}&viewer_fid=${fid}`;
 
   const options = {
     method: 'GET',
@@ -370,14 +372,14 @@ async function checkFollowers(fid: number): Promise<followingDevRel> {
   }
 
   if (response.ok) {
-    const followsJson = await response.json();
-    const relevantFollowers = followsJson?.all_relevant_followers_dehydrated;
-    console.log('relevantFollowers', relevantFollowers);
-    if (relevantFollowers) {
-      following.brian = isFidPresent(relevantFollowers, devRelFIDs.brian);
-      following.ryan = isFidPresent(relevantFollowers, devRelFIDs.ryan);
-      following.taylor = isFidPresent(relevantFollowers, devRelFIDs.taylor);
-      following.will = isFidPresent(relevantFollowers, devRelFIDs.will);
+    const result = await response.json();
+    const devRelUsers: NeynarUser[] = result?.users;
+
+    if (devRelUsers) {
+      following.brian = isFollowedBy(devRelUsers, devRelFIDs.brian);
+      following.ryan = isFollowedBy(devRelUsers, devRelFIDs.ryan);
+      following.taylor = isFollowedBy(devRelUsers, devRelFIDs.taylor);
+      following.will = isFollowedBy(devRelUsers, devRelFIDs.will);
     }
 
     // Handle edge case because we don't follow ourselves
