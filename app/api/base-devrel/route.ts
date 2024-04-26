@@ -54,7 +54,7 @@ addHyperFrame('start', {
   }),
   1: 'seaside',
   2: (text: string) => {
-    return JSON.parse(text) === followingAll ? 'all-four' : 'cloudy-sky';
+    return text === JSON.stringify(followingAll) ? 'all-four' : 'cloudy-sky';
   },
   3: 'mountains',
 });
