@@ -5,13 +5,13 @@ import { NEXT_PUBLIC_URL } from '../config';
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'To the Sea',
+      label: 'Seaside',
     },
     {
       label: 'Climb',
     },
     {
-      label: 'To The Mountains',
+      label: 'Mountains',
     },
   ],
   image: {
