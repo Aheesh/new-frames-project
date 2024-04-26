@@ -344,7 +344,7 @@ function isFollowedBy(users: NeynarUser[], fidToCheck: number): boolean {
   const user = users.find((user) => user.fid === fidToCheck);
 
   // Return true if the user is found and followed_by is true, otherwise false
-  return user ? user.viewer_context.followed_by : false;
+  return user ? user.viewer_context.following : false;
 }
 
 async function checkFollowers(fid: number): Promise<followingDevRel> {
