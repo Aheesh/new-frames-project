@@ -67,7 +67,7 @@ addHyperFrame('all-four', {
       }
     ],
     image: {
-      src: `${NEXT_PUBLIC_URL}/base-devrel/base-devrel-stars.webp`,
+      src: `${NEXT_PUBLIC_URL}/base-devrel/base-devrel-stars.png`,
       aspectRatio: '1:1',
     },
     state: { frame: 'all-four' },
