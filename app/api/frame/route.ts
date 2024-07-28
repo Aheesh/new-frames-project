@@ -7,422 +7,117 @@ addHyperFrame('start', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'Road',
+        label: 'Player A',
       },
       {
-        label: 'Woods',
+        label: 'Player B',
       },
       {
-        label: 'Cave',
-      },
-      {
-        action: 'link',
-        label: 'TODO',
-        target: 'https://www.google.com',
+        label: 'Draw ',
       },
     ],
     image: {
-      src: `${NEXT_PUBLIC_URL}/frame-1-forest.webp`,
+      src: `${NEXT_PUBLIC_URL}/game1.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: "start" },
+    state: { frame: 'start' },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
   }),
-  1: 'road',
-  2: 'woods-bear',
-  3: 'cave-1',
+  1: 'Player-A',
+  2: 'Player-B',
+  3: 'Draw',
 });
 
-addHyperFrame('woods-bear', {
+addHyperFrame('Player-A', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'Go Back',
+        label: 'XL DEGEN',
       },
       {
-        label: 'TODO',
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
       },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/woods-bear.png`,
       aspectRatio: '1:1',
     },
-    state: { frame: "woods-bear" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+    state: { frame: 'Player-A' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
   }),
-  1: 'start',
-  2: 'start',
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
 });
 
-addHyperFrame('cave-1', {
+addHyperFrame('Player-B', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'Deeper...',
+        label: 'XL DEGEN',
       },
       {
-        label: 'Leave',
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
       },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/cave-1.png`,
       aspectRatio: '1:1',
     },
-    state: { frame: "cave-1" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+    state: { frame: 'Player-B' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
   }),
-  1: 'cave-2',
-  2: 'start',
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
 });
 
-addHyperFrame('cave-2', {
+addHyperFrame('Draw', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'Deeper...',
+        label: 'XL DEGEN',
       },
       {
-        label: 'Leave',
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
       },
     ],
     image: {
       src: `${NEXT_PUBLIC_URL}/cave-2.png`,
       aspectRatio: '1:1',
     },
-    state: { frame: "cave-2" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame?frame`,
+    state: { frame: 'Draw' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
   }),
-  1: 'cave-3',
-  2: 'start',
-});
-
-addHyperFrame('cave-3', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Start Over',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/cave-3.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "cave-3" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'start',
-});
-
-addHyperFrame('road', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'Shack',
-      },
-      {
-        label: 'Forward',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/road.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "road" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'start',
-  2: 'shack',
-  3: 'desert-road',
-});
-
-addHyperFrame('shack', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'Door',
-      },
-      {
-        label: 'Testing',
-      }
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/shack.png`,
-      aspectRatio: '1:1',
-    },
-    input: {
-      text: 'What is the password?',
-    },
-    state: { frame: "shack" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame?frame`,
-  }),
-  1: 'road',
-  2: (text: string) => {
-    return text === 'All your Base are belong to you' ? 'key' : 'shack-bad-password';
-  },
-  3: () => {
-    return 'shack-bad-password';
-  }
-});
-
-addHyperFrame('shack-bad-password', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'Door',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/shack.png`,
-      aspectRatio: '1:1',
-    },
-    input: {
-      text: 'Try again. What is the password?',
-    },
-    state: { frame: "shack-bad-password" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame?frame`,
-  }),
-  1: 'road',
-  2: (text: string) => {
-    return text === 'All your Base are belong to you' ? 'key' : 'shack-bad-password';
-  },
-});
-
-addHyperFrame('key', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'TODO',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/key.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "key" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'shack',
-});
-
-addHyperFrame('desert-road', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'Go Forward',
-      },
-      {
-        label: 'Desert',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-road.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-road" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame?frame`,
-  }),
-  1: 'road',
-  2: 'mountain-road',
-  3: 'desert-lost-1',
-});
-
-addHyperFrame('mountain-road', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'Go Forward',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/mountain-road.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "mountain-road" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-road',
-  2: 'mountain-goat',
-});
-
-addHyperFrame('mountain-goat', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'TODO',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/mountain-goat.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "mountain-goat" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'mountain-road',
-  2: 'mountain-goat',
-});
-
-addHyperFrame('desert-lost-1', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'North',
-      },
-      {
-        label: 'South',
-      },
-      {
-        label: 'East',
-      },
-      {
-        label: 'West',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-lost.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-lost-1" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-road',
-  2: 'desert-lost-2',
-  3: 'desert-road',
-  4: 'desert-road',
-});
-
-addHyperFrame('desert-lost-2', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'North',
-      },
-      {
-        label: 'South',
-      },
-      {
-        label: 'East',
-      },
-      {
-        label: 'West',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-lost.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-lost-2" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-road',
-  2: 'desert-road',
-  3: 'desert-road',
-  4: 'desert-lost-3',
-});
-
-addHyperFrame('desert-lost-3', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'North',
-      },
-      {
-        label: 'South',
-      },
-      {
-        label: 'East',
-      },
-      {
-        label: 'West',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-lost.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-lost-3" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-road',
-  2: 'desert-road',
-  3: 'desert-road',
-  4: 'desert-lost-4',
-});
-
-addHyperFrame('desert-lost-4', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'North',
-      },
-      {
-        label: 'South',
-      },
-      {
-        label: 'East',
-      },
-      {
-        label: 'West',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-lost.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-lost-4" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-oasis',
-  2: 'desert-road',
-  3: 'desert-road',
-  4: 'desert-road',
-});
-
-addHyperFrame('desert-oasis', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Go Back',
-      },
-      {
-        label: 'TODO',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-oasis.png`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: "desert-oasis" },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-  }),
-  1: 'desert-road',
-  2: 'desert-road',
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
 });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log("Frame endpoint");
-  
+  console.log('Frame endpoint');
+
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
 
@@ -439,8 +134,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     text = message.input;
   }
 
-  let state = {frame: "start"};
-  
+  let state = { frame: 'start' };
+
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));
   } catch (e) {
@@ -448,8 +143,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const frame = state.frame;
-  console.log("state", message.state);
-  console.log("frame", frame);
+  console.log('state', message.state);
+  console.log('frame', frame);
 
   // TODO: Cleanup this error handling
   if (!frame) {

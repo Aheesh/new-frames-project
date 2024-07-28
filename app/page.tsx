@@ -5,13 +5,13 @@ import { NEXT_PUBLIC_URL } from './config';
 const frameMetadata = getFrameMetadata({
   buttons: [
     {
-      label: 'Road',
+      label: 'Player A',
     },
     {
-      label: 'Woods',
+      label: 'Player B',
     },
     {
-      label: 'Cave',
+      label: 'Draw',
     },
     {
       action: 'link',
@@ -20,19 +20,19 @@ const frameMetadata = getFrameMetadata({
     },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/frame-1-forest.webp`,
+    src: `${NEXT_PUBLIC_URL}/game1.webp`,
     aspectRatio: '1:1',
   },
-  state: { frame: "start" },
+  state: { frame: 'start' },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
-  title: 'HyperFrames!',
-  description: 'Time is a flat circle.',
+  title: 'Baller Chess - HyperFrames!',
+  description: 'Yes to Chess with a twist!',
   openGraph: {
-    title: 'HyperFrames!',
-    description: 'Time is a flat circle.',
+    title: 'Baller Chess - HyperFrames!',
+    description: 'Yes to Chess with a twist!',
     images: [`${NEXT_PUBLIC_URL}/frame-1-forest.webp`],
   },
   other: {
@@ -43,8 +43,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <h1>HyperFrames!</h1>
-      <a href="https://docs.base.org/building-with-base/guides/hyperframes">Click here to learn how to make this!</a>
+      <h1>Baller Chess using - HyperFrames!</h1>
+      <a href="https://docs.base.org/building-with-base/guides/hyperframes">
+        Click here to learn how to make this!
+      </a>
     </>
   );
 }
