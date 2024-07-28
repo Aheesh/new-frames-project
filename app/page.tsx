@@ -13,11 +13,6 @@ const frameMetadata = getFrameMetadata({
     {
       label: 'Draw',
     },
-    {
-      action: 'link',
-      label: 'TODO',
-      target: 'https://www.google.com',
-    },
   ],
   image: {
     src: `${NEXT_PUBLIC_URL}/game1.webp`,
