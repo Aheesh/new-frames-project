@@ -116,7 +116,7 @@ addHyperFrame('Draw', {
 });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('Frame endpoint');
+  console.log('Base Frame endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
