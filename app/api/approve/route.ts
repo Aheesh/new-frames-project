@@ -64,7 +64,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (!message?.button) {
     return new NextResponse('Button not found', { status: 404 });
   }
-
+  console.log('api/approve/route.ts : message =>', message);
+  console.log('api/approve/route.ts : button =>', message.button);
   return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
