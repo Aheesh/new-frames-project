@@ -116,7 +116,7 @@ addHyperFrame('Draw', {
 });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/Frame/route.ts : Base Frame endpoint');
+  console.log('api/frame/route.ts : Base Frame endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
@@ -143,8 +143,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const frame = state.frame;
-  console.log('api/frame/route.ts : state', message.state);
-  console.log('api/frame/route.ts : frame', frame);
+  console.log('api/frame/route.ts : state =>', message.state);
+  console.log('api/frame/route.ts : frame =>', frame);
 
   // TODO: Cleanup this error handling
   if (!frame) {

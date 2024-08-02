@@ -52,8 +52,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const frame = state.frame;
-  console.log('state', message.state);
-  console.log('frame', frame);
+  console.log('api/approve/route.ts :state =>', message.state);
+  console.log('api/approve/route.ts :frame =>', frame);
 
   // TODO: Cleanup this error handling
   if (!frame) {
