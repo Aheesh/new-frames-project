@@ -25,7 +25,7 @@ addHyperFrame('approve', {
 });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('Approve endpoint');
+  console.log('api/approve/route.ts : Approve endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
