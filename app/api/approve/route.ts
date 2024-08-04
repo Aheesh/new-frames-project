@@ -18,7 +18,7 @@ addHyperFrame('approve', {
       aspectRatio: '1:1',
     },
     state: { frame: 'approve' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
   }),
   1: 'ApproveTx',
   2: 'start',
@@ -50,6 +50,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } catch (e) {
     console.error(e);
   }
+  console.log('api/approve/route.ts :accountAddress =>', accountAddress);
 
   const frame = state.frame;
   console.log('api/approve/route.ts :state =>', message.state);
