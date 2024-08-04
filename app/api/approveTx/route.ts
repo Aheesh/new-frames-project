@@ -23,7 +23,7 @@ addHyperFrame('approveTx', {
       src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'approve' },
+    state: { frame: 'approveTx' },
     postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
   }),
   1: 'start',
