@@ -6,6 +6,29 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
+import { NEXT_PUBLIC_URL } from '../../config';
+import { addHyperFrame, getHyperFrame } from '../../hyperframes';
+
+addHyperFrame('approveTx', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'CHECK',
+      },
+      {
+        label: 'Cancel',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'approve' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+  }),
+  1: 'start',
+  2: 'start',
+});
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approve/route.ts : Approve endpoint');
@@ -46,6 +69,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approveTx/route.ts : button =>', message.button);
 
   return new NextResponse('Approve', { status: 200 }); // TODO
+  //return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {

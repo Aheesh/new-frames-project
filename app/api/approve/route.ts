@@ -20,7 +20,7 @@ addHyperFrame('approve', {
     state: { frame: 'approve' },
     postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
   }),
-  1: 'ApproveTx',
+  1: 'approveTx',
   2: 'start',
 });
 
