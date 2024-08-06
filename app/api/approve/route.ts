@@ -67,6 +67,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
   console.log('api/approve/route.ts : message =>', message);
   console.log('api/approve/route.ts : button =>', message.button);
+  console.log('api/approve/route.ts : text =>', text);
+  console.log('api/approve/route.ts : frame =>', frame);
   return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
