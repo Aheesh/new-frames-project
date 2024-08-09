@@ -14,6 +14,7 @@ export function addHyperFrame(label: string, frame: HyperFrame) {
 
 export function getHyperFrame(frame: string, text: string, button: number) {
   console.log('hyperframes.ts : frame =>', frame);
+  console.log('hyperframes.ts : frames =>', frames);
   const currentFrame = frames[frame];
   console.log('hyperframes.ts : currentFrame =>', currentFrame);
   const nextFrameIdOrFunction = currentFrame[button as keyof HyperFrame];
