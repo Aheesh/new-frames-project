@@ -115,6 +115,48 @@ addHyperFrame('Draw', {
   4: 'start',
 });
 
+addHyperFrame('approve', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'Approve',
+      },
+      {
+        label: 'Cancel',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/game1.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'approve' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+  }),
+  1: 'approveTx',
+  2: 'start',
+});
+
+addHyperFrame('approveTx', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'CHECK',
+      },
+      {
+        label: 'Cancel',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'approveTx' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+  }),
+  1: 'start',
+  2: 'start',
+});
+
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/frame/route.ts : Base Frame endpoint');
 
