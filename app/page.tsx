@@ -18,7 +18,7 @@ const frameMetadata = getFrameMetadata({
     src: `${NEXT_PUBLIC_URL}/game1.webp`,
     aspectRatio: '1:1',
   },
-  state: { frame: 'start' },
+  //state: { frame: 'start' },
   postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
