@@ -4,6 +4,8 @@ export type HyperFrame = {
   2?: string | ((text: string) => string) | (() => string);
   3?: string | ((text: string) => string) | (() => string);
   4?: string | ((text: string) => string) | (() => string);
+  5?: string | ((text: string) => string) | (() => string);
+  6?: string | ((text: string) => string) | (() => string);
 };
 
 const frames: Record<string, HyperFrame> = {};
