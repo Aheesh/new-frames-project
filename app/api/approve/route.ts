@@ -3,26 +3,26 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
 import { addHyperFrame, getHyperFrame } from '../../hyperframes';
 
-addHyperFrame('approve', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'Approve',
-      },
-      {
-        label: 'Cancel',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/game1.webp`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: 'approve' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
-  }),
-  1: 'approveTx',
-  2: 'start',
-});
+// addHyperFrame('approve', {
+//   frame: getFrameHtmlResponse({
+//     buttons: [
+//       {
+//         label: 'Approve',
+//       },
+//       {
+//         label: 'Cancel',
+//       },
+//     ],
+//     image: {
+//       src: `${NEXT_PUBLIC_URL}/game1.webp`,
+//       aspectRatio: '1:1',
+//     },
+//     state: { frame: 'approve' },
+//     postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+//   }),
+//   1: 'approveTx',
+//   2: 'start',
+// });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approve/route.ts : Approve endpoint');
@@ -43,7 +43,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     text = message.input;
   }
 
-  let state = { frame: 'start' };
+  let state; // = { frame: 'start' };
 
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));

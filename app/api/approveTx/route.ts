@@ -9,26 +9,26 @@ import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/o
 import { NEXT_PUBLIC_URL } from '../../config';
 import { addHyperFrame, getHyperFrame } from '../../hyperframes';
 
-addHyperFrame('approveTx', {
-  frame: getFrameHtmlResponse({
-    buttons: [
-      {
-        label: 'CHECK',
-      },
-      {
-        label: 'Cancel',
-      },
-    ],
-    image: {
-      src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
-      aspectRatio: '1:1',
-    },
-    state: { frame: 'approveTx' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
-  }),
-  1: 'start',
-  2: 'start',
-});
+// addHyperFrame('approveTx', {
+//   frame: getFrameHtmlResponse({
+//     buttons: [
+//       {
+//         label: 'CHECK',
+//       },
+//       {
+//         label: 'Cancel',
+//       },
+//     ],
+//     image: {
+//       src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
+//       aspectRatio: '1:1',
+//     },
+//     state: { frame: 'approveTx' },
+//     postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+//   }),
+//   1: 'start',
+//   2: 'start',
+// });
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approve/route.ts : Approve endpoint');
@@ -44,7 +44,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  let state = { frame: 'start' };
+  let state; // = { frame: 'start' };
 
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));
