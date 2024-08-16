@@ -9,7 +9,7 @@ export type HyperFrame = {
   4?: string | ((text: string) => string) | (() => string);
 };
 
-export const frames: Record<string, HyperFrame> = {};
+const frames: Record<string, HyperFrame> = {};
 
 export function addHyperFrame(label: string, frame: HyperFrame) {
   frames[label] = frame;
