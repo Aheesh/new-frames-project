@@ -38,3 +38,157 @@ export function getHyperFrame(frame: string, text: string, button: number) {
   console.log('hyperframes.ts : frames[nextFrameId] =>', frames[nextFrameId]);
   return frames[nextFrameId].frame;
 }
+
+addHyperFrame('start', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'Player A',
+      },
+      {
+        label: 'Player B',
+      },
+      {
+        label: 'Draw ',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/game1.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'start' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+  }),
+  1: 'Player-A',
+  2: 'Player-B',
+  3: 'Draw',
+});
+
+addHyperFrame('Player-A', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'XL DEGEN',
+      },
+      {
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/woods-bear.png`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'Player-A' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+  }),
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
+});
+
+addHyperFrame('Player-B', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'XL DEGEN',
+      },
+      {
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/cave-1.png`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'Player-B' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+  }),
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
+});
+
+addHyperFrame('Draw', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'XL DEGEN',
+      },
+      {
+        label: 'XXL DEGEN',
+      },
+      {
+        label: 'XXXL DEGEN',
+      },
+      {
+        label: 'CANCEL',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/cave-2.png`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'Draw' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+  }),
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
+  4: 'start',
+});
+
+addHyperFrame('approve', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'Approve',
+      },
+      {
+        label: 'Cancel',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/game1.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'approve' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+  }),
+  1: 'approveTx',
+  2: 'start',
+});
+
+addHyperFrame('approveTx', {
+  frame: getFrameHtmlResponse({
+    buttons: [
+      {
+        label: 'CHECK',
+      },
+      {
+        label: 'Cancel',
+      },
+    ],
+    image: {
+      src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
+      aspectRatio: '1:1',
+    },
+    state: { frame: 'approveTx' },
+    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+  }),
+  1: 'start',
+  2: 'start',
+});
