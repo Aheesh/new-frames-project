@@ -34,6 +34,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approve/route.ts : Approve endpoint');
 
   let accountAddress: string | undefined = '';
+  let text: string | undefined = '';
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -68,8 +69,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approveTx/route.ts : message =>', message);
   console.log('api/approveTx/route.ts : button =>', message.button);
 
-  return new NextResponse('Approve', { status: 200 }); // TODO
-  //return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  //return new NextResponse('Approve', { status: 200 }); // TODO
+  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
