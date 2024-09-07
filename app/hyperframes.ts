@@ -187,7 +187,7 @@ addHyperFrame('approveTx', {
       aspectRatio: '1:1',
     },
     state: { frame: 'approveTx' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/erc20Approval`,
   }),
   1: 'start',
   2: 'start',

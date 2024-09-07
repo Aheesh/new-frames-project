@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/approve/route.ts : Approve endpoint');
+  console.log('api/erc20Approval/route.ts : post ERC20 Approval tx ');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
@@ -25,7 +25,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } catch (e) {
     console.error(e);
   }
-  console.log('api/approveTx/route.ts :accountAddress =>', accountAddress);
+  console.log('api/erc20Approval/route.ts :accountAddress =>', accountAddress);
 
   return new NextResponse('Message not valid', { status: 500 });
   //return NextResponse.json(txData);
