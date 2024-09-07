@@ -8,6 +8,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NEXT_PUBLIC_URL } from '../../config';
 import { addHyperFrame, getHyperFrame } from '../../hyperframes';
+import { encodeFunctionData, parseUnits } from 'viem';
+import abi from '../../_contracts/degen';
+import { BAL_VAULT_ADDR, DEGEN_ADDR } from '../../config';
+import { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
+import { base } from 'viem/chains';
 
 // addHyperFrame('approveTx', {
 //   frame: getFrameHtmlResponse({
@@ -54,6 +59,33 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
   console.log('api/approveTx/route.ts :accountAddress =>', accountAddress);
 
+  console.log('api/approveTx/route.ts : message =>', message);
+  console.log('api/approveTx/route.ts : button =>', message.button);
+
+  //TODO : amount based on previous frame button and player / draw outcome from 1st frame.
+  const amount = message.button === 1 ? 1 : 0;
+  console.log('api/approveTx/route.ts :amount =>', amount);
+
+  const value = parseUnits(amount.toString(), 18);
+  console.log('api/approveTx/route.ts :value =>', value);
+
+  const data = encodeFunctionData({
+    abi: abi,
+    functionName: 'approve',
+    args: [BAL_VAULT_ADDR, value],
+  });
+
+  const txData: FrameTransactionResponse = {
+    chainId: `eip155:${base.id}`,
+    method: 'eth_sendTransaction',
+    params: {
+      abi: abi,
+      data: data,
+      to: DEGEN_ADDR,
+      value: '0x0',
+    },
+  };
+
   const frame = state.frame;
   console.log('api/approveTx/route.ts :state =>', message.state);
   console.log('api/approveTx/route.ts :frame =>', frame);
@@ -66,11 +98,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   if (!message?.button) {
     return new NextResponse('Button not found', { status: 404 });
   }
-  console.log('api/approveTx/route.ts : message =>', message);
-  console.log('api/approveTx/route.ts : button =>', message.button);
 
   //return new NextResponse('Approve', { status: 200 }); // TODO
-  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  //return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  return NextResponse.json(txData);
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
