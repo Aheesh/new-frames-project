@@ -36,6 +36,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } catch (e) {
     console.error(e);
   }
+  console.log('api/approveTx/route.ts :State =>', state);
   console.log('api/approveTx/route.ts :accountAddress =>', accountAddress);
 
   console.log('api/approveTx/route.ts : message =>', message);
@@ -80,7 +81,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   //return new NextResponse('Approve', { status: 200 }); // TODO
   console.log('api/approveTx/route.ts : txData =>', txData);
-  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  return NextResponse.json(txData);
+  //return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
