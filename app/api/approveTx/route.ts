@@ -14,29 +14,8 @@ import { BAL_VAULT_ADDR, DEGEN_ADDR } from '../../config';
 import { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 import { base } from 'viem/chains';
 
-// addHyperFrame('approveTx', {
-//   frame: getFrameHtmlResponse({
-//     buttons: [
-//       {
-//         label: 'CHECK',
-//       },
-//       {
-//         label: 'Cancel',
-//       },
-//     ],
-//     image: {
-//       src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
-//       aspectRatio: '1:1',
-//     },
-//     state: { frame: 'approveTx' },
-//     postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
-//   }),
-//   1: 'start',
-//   2: 'start',
-// });
-
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/approve/route.ts : Approve endpoint');
+  console.log('api/approvetx/route.ts : Approve endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
