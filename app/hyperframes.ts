@@ -68,13 +68,13 @@ addHyperFrame('Player-A', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'XL DEGEN',
+        label: '100 DEGEN',
       },
       {
-        label: 'XXL DEGEN',
+        label: '200 DEGEN',
       },
       {
-        label: 'XXXL DEGEN',
+        label: '500 DEGEN',
       },
       {
         label: 'CANCEL',
@@ -85,7 +85,7 @@ addHyperFrame('Player-A', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Player-A' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/approvetx`,
   }),
   1: 'approve',
   2: 'approve',
@@ -97,13 +97,13 @@ addHyperFrame('Player-B', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'XL DEGEN',
+        label: '100 DEGEN',
       },
       {
-        label: 'XXL DEGEN',
+        label: '200 DEGEN',
       },
       {
-        label: 'XXXL DEGEN',
+        label: '500 DEGEN',
       },
       {
         label: 'CANCEL',
@@ -114,7 +114,7 @@ addHyperFrame('Player-B', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Player-B' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/approvetx`,
   }),
   1: 'approve',
   2: 'approve',
@@ -126,13 +126,13 @@ addHyperFrame('Draw', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'XL DEGEN',
+        label: '100 DEGEN',
       },
       {
-        label: 'XXL DEGEN',
+        label: '200 DEGEN',
       },
       {
-        label: 'XXXL DEGEN',
+        label: '500 DEGEN',
       },
       {
         label: 'CANCEL',
@@ -143,7 +143,7 @@ addHyperFrame('Draw', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Draw' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approve`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/approvetx`,
   }),
   1: 'approve',
   2: 'approve',
