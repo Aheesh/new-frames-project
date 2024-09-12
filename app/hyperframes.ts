@@ -91,7 +91,7 @@ addHyperFrame('Player-A', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Player-A' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
   }),
   1: 'approve',
   2: 'approve',
@@ -161,7 +161,9 @@ addHyperFrame('approve', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'Approve',
+        action: 'tx',
+        label: 'Swap Approve',
+        target: `${NEXT_PUBLIC_URL}/api/swaptx`,
       },
       {
         label: 'Cancel',
