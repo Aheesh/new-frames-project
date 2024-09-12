@@ -68,13 +68,19 @@ addHyperFrame('Player-A', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
+        action: 'tx',
         label: '100 DEGEN',
+        target: `${NEXT_PUBLIC_URL}/api/approveTx`,
       },
       {
+        action: 'tx',
         label: '200 DEGEN',
+        target: `${NEXT_PUBLIC_URL}/api/approveTx`,
       },
       {
+        action: 'tx',
         label: '500 DEGEN',
+        target: `${NEXT_PUBLIC_URL}/api/approveTx`,
       },
       {
         label: 'CANCEL',
