@@ -10,7 +10,7 @@ import { DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
 import { ethers } from 'ethers';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/approvetx/route.ts : Approve endpoint');
+  console.log('api/swapTx/route.ts : Approve endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
@@ -33,8 +33,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   }
 
   const frame = state.frame;
-  console.log('api/approveTx/route.ts :state =>', message.state);
-  console.log('api/approveTx/route.ts :frame =>', frame);
+  console.log('api/swapTx/route.ts :state =>', message.state);
+  console.log('api/swapTx/route.ts :frame =>', frame);
 
   if (!frame) {
     return new NextResponse('Frame not found', { status: 404 });
@@ -78,3 +78,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   return new NextResponse(getHyperFrame(frame as string, text || 'approve', message?.button));
 }
+
+export async function POST(req: NextRequest): Promise<Response> {
+  return getResponse(req);
+}
+
+export const dynamic = 'force-dynamic';
