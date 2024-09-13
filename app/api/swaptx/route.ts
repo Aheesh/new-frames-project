@@ -45,6 +45,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Button not found', { status: 404 });
   }
 
+  /*
   //QueryBatchSwap to get the expected amount of tokens Out for confirmation
   const providerApiKey = process.env.BASE_PROVIDER_API_KEY;
 
@@ -74,7 +75,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   });
   console.log('queryInfo', queryInfo);
   const absValue = Math.abs(Number(ethers.utils.formatEther(queryInfo[1])));
-  console.log('queryInfo', absValue);
+  console.log('queryInfo', absValue); */
+
+  text = 'Player-B';
+  console.log('api/swapTx/route.ts : text =>', text);
 
   return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
