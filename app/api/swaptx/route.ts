@@ -76,7 +76,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const absValue = Math.abs(Number(ethers.utils.formatEther(queryInfo[1])));
   console.log('queryInfo', absValue);
 
-  return new NextResponse(getHyperFrame(frame as string, text || 'approve', message?.button));
+  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
