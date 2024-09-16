@@ -92,7 +92,7 @@ addHyperFrame('Player-A', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Player-A' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
+    //postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
   }),
   1: 'approve',
   2: 'approve',
