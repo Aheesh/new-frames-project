@@ -97,24 +97,47 @@ import { NEXT_PUBLIC_URL } from '../../config';
 import { getHyperFrame } from '../../hyperframes';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+  console.log('api/swapTx/route.ts : Post URL for erc20 approval');
+
+  let accountAddress: string | undefined = '';
+  let text: string | undefined = '';
+
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
-  if (!isValid) {
+  console.log('api/swapTx/route.ts : body =>', body);
+
+  if (isValid) {
+    accountAddress = message.interactor.verified_accounts[0];
+  } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  let text: string | undefined = '';
   let state;
+
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));
   } catch (e) {
     console.error(e);
   }
   console.log('api/swapTx/route.ts :State =>', state);
+  console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
+
+  console.log('api/swapTx/route.ts : message =>', message);
+  console.log('api/swapTx/route.ts : button =>', message.button);
 
   const frame = state.frame;
+  console.log('api/swapTx/route.ts :state =>', message.state);
   console.log('api/swapTx/route.ts :frame =>', frame);
+
+  if (!frame) {
+    return new NextResponse('Frame not found', { status: 404 });
+  }
+
+  // There should always be a button number
+  if (!message?.button) {
+    return new NextResponse('Button not found', { status: 404 });
+  }
 
   return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
