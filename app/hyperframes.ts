@@ -71,6 +71,7 @@ addHyperFrame('Player-A', {
         action: 'tx',
         label: '100 DEGEN',
         target: `${NEXT_PUBLIC_URL}/api/approveTx`,
+        postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
       },
       {
         action: 'tx',
