@@ -163,7 +163,7 @@ addHyperFrame('approve', {
       {
         action: 'tx',
         label: 'Swap Approve',
-        target: `${NEXT_PUBLIC_URL}/api/swaptx`,
+        target: `${NEXT_PUBLIC_URL}/api/swapTx`,
       },
       {
         label: 'Cancel',
