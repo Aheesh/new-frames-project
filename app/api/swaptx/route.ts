@@ -94,6 +94,7 @@ export const dynamic = 'force-dynamic';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
+import { getHyperFrame } from '../../hyperframes';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
@@ -103,30 +104,19 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  return new NextResponse(
-    getFrameHtmlResponse({
-      buttons: [
-        {
-          action: 'tx',
-          label: 'Click Again!',
-          target: `${NEXT_PUBLIC_URL}/api/buttonclicker`,
-        },
-        {
-          action: 'link',
-          label: 'Leaderboard',
-          target: `${NEXT_PUBLIC_URL}/buttonclicker`,
-        },
-      ],
-      image: {
-        src: `${NEXT_PUBLIC_URL}/button.webp`,
-        aspectRatio: '1:1',
-      },
-      input: {
-        text: 'Noooo, why did you click!?',
-      },
-      postUrl: `${NEXT_PUBLIC_URL}/api/aftertx`,
-    }),
-  );
+  let text: string | undefined = '';
+  let state;
+  try {
+    state = JSON.parse(decodeURIComponent(message.state?.serialized));
+  } catch (e) {
+    console.error(e);
+  }
+  console.log('api/swapTx/route.ts :State =>', state);
+
+  const frame = state.frame;
+  console.log('api/swapTx/route.ts :frame =>', frame);
+
+  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
