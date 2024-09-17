@@ -71,7 +71,6 @@ addHyperFrame('Player-A', {
         action: 'tx',
         label: '100 DEGEN',
         target: `${NEXT_PUBLIC_URL}/api/approveTx`,
-        postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
       },
       {
         action: 'tx',
@@ -92,11 +91,11 @@ addHyperFrame('Player-A', {
       aspectRatio: '1:1',
     },
     state: { frame: 'Player-A' },
-    //postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/swapTx`,
   }),
-  1: 'approve',
-  2: 'approve',
-  3: 'approve',
+  1: 'swap',
+  2: 'swap',
+  3: 'swap',
   4: 'start',
 });
 
