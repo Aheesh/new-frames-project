@@ -93,9 +93,9 @@ addHyperFrame('Player-A', {
     state: { frame: 'Player-A' },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
   }),
-  1: 'swap',
-  2: 'swap',
-  3: 'swap',
+  1: 'approve',
+  2: 'approve',
+  3: 'approve',
   4: 'start',
 });
 
