@@ -23,6 +23,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
+  console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
 
   let state; // = { frame: 'start' };
 
