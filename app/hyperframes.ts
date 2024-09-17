@@ -174,7 +174,7 @@ addHyperFrame('approve', {
       aspectRatio: '1:1',
     },
     state: { frame: 'approve' },
-    postUrl: `${NEXT_PUBLIC_URL}/api/approveTx`,
+    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
   }),
   1: 'approveTx',
   2: 'start',
@@ -184,10 +184,10 @@ addHyperFrame('approveTx', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
-        label: 'CHECK',
+        label: 'SUCCESS',
       },
       {
-        label: 'Cancel',
+        label: 'Start Again',
       },
     ],
     image: {

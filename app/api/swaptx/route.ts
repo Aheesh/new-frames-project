@@ -5,7 +5,7 @@ dotenv.config();
 import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { getHyperFrame } from '../../hyperframes';
-import { BalancerSDK, Network, SwapType } from '@balancer-labs/sdk';
+import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
 import { DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
 import { ethers } from 'ethers';
 
@@ -53,15 +53,20 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     rpcUrl: `https://base-mainnet.g.alchemy.com/v2/${providerApiKey}`,
   });
 
+  const { contracts } = sdk;
+  console.log('contracts', contracts.vault.address);
+
   const tokenIn = DEGEN_ADDR;
   const tokenOut = PLAYER_A_ADDR; //TODO should be based on the option selected
+
+  const value = String(1e18); //TODO get the amount from the user on first frame.
 
   const swaps = [
     {
       poolId: POOL_ID,
       assetInIndex: 0,
       assetOutIndex: 1,
-      amount: String(1e18), //TODO get the amount from the user
+      amount: value, //TODO get the amount from the user
       userData: '0x',
     },
   ];
@@ -76,7 +81,55 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const absValue = Math.abs(Number(ethers.utils.formatEther(queryInfo[1])));
   console.log(`queryInfo - Swap : You will receive ${absValue} ${tokenOut}`);
 
-  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
+  const encodeBatchSwapData = Swaps.encodeBatchSwap({
+    kind: SwapType.SwapExactIn,
+    swaps: [
+      {
+        poolId: POOL_ID,
+        assetInIndex: 0,
+        assetOutIndex: 1,
+        amount: value,
+        userData: '0x',
+      },
+    ],
+    assets: [tokenIn, tokenOut],
+
+    funds: {
+      fromInternalBalance: false,
+      recipient: accountAddress,
+      sender: accountAddress,
+      toInternalBalance: false,
+    },
+    limits: [value, '0'],
+    deadline: Math.ceil(Date.now() / 1000) + 60,
+  });
+
+  console.log('encodeBatchSwapData', encodeBatchSwapData);
+  //convert encodeBatchSwapData to remove the leading 0x characters
+  const hexSwapData = encodeBatchSwapData.slice(2);
+  console.log('hexSwapData', hexSwapData);
+
+  // Set gas parameters
+  const gasLimit = ethers.BigNumber.from(300000); // Adjust as needed
+  const maxFeePerGas = ethers.utils.parseUnits('1', 'gwei'); // 1 gwei
+  const maxPriorityFeePerGas = ethers.utils.parseUnits('0.1', 'gwei'); // 0.1 gwei
+
+  //Frame Transaction
+  const txData = {
+    chainId: `eip155:${Network.BASE}`,
+    method: 'eth_sendTransaction',
+    params: {
+      to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
+      data: `0x${hexSwapData}`,
+      value: '0',
+      gasLimit: gasLimit,
+      maxFeePerGas: maxFeePerGas,
+      maxPriorityFeePerGas: maxPriorityFeePerGas,
+    },
+  };
+  console.log('txData', txData);
+
+  return NextResponse.json(txData);
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
