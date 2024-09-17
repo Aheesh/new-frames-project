@@ -1,5 +1,5 @@
 //Query Batchswap , display the token that will be swapped for the DEGEN amount selected in previous frame.
-/*
+
 import dotenv from 'dotenv';
 dotenv.config();
 import { NextRequest, NextResponse } from 'next/server';
@@ -10,7 +10,7 @@ import { DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
 import { ethers } from 'ethers';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/swapTx/route.ts : Approve endpoint');
+  console.log('api/swapTx/route.ts : Swap Tx endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
@@ -45,7 +45,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Button not found', { status: 404 });
   }
 
-  /*
   //QueryBatchSwap to get the expected amount of tokens Out for confirmation
   const providerApiKey = process.env.BASE_PROVIDER_API_KEY;
 
@@ -75,70 +74,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   });
   console.log('queryInfo', queryInfo);
   const absValue = Math.abs(Number(ethers.utils.formatEther(queryInfo[1])));
-  console.log('queryInfo', absValue); */
-
-/*
-  text = 'Player-B';
-  console.log('api/swapTx/route.ts : text =>', text);
-
-  return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
-}
-
-export async function POST(req: NextRequest): Promise<Response> {
-  return getResponse(req);
-}
-
-export const dynamic = 'force-dynamic';
-*/
-
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
-import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
-import { getHyperFrame } from '../../hyperframes';
-
-async function getResponse(req: NextRequest): Promise<NextResponse> {
-  console.log('api/swapTx/route.ts : Post URL for erc20 approval');
-
-  let accountAddress: string | undefined = '';
-  let text: string | undefined = '';
-
-  const body: FrameRequest = await req.json();
-  const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
-
-  console.log('api/swapTx/route.ts : body =>', body);
-
-  if (isValid) {
-    accountAddress = message.interactor.verified_accounts[0];
-  } else {
-    return new NextResponse('Message not valid', { status: 500 });
-  }
-
-  let state;
-
-  try {
-    state = JSON.parse(decodeURIComponent(message.state?.serialized));
-  } catch (e) {
-    console.error(e);
-  }
-  console.log('api/swapTx/route.ts :State =>', state);
-  console.log('api/swapTx/route.ts :state.frame =>', state.frame);
-  console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
-
-  console.log('api/swapTx/route.ts : message =>', message);
-  console.log('api/swapTx/route.ts : button =>', message.button);
-
-  const frame = state.frame;
-  console.log('api/swapTx/route.ts :state =>', message.state);
-  console.log('api/swapTx/route.ts :frame =>', frame);
-
-  if (!frame) {
-    return new NextResponse('Frame not found', { status: 404 });
-  }
-
-  // There should always be a button number
-  if (!message?.button) {
-    return new NextResponse('Button not found', { status: 404 });
-  }
+  console.log(`queryInfo - Swap : You will receive ${absValue} ${tokenOut}`);
 
   return new NextResponse(getHyperFrame(frame as string, text || '', message?.button));
 }
