@@ -121,6 +121,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     console.error(e);
   }
   console.log('api/swapTx/route.ts :State =>', state);
+  console.log('api/swapTx/route.ts :state.frame =>', state.frame);
   console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
 
   console.log('api/swapTx/route.ts : message =>', message);
