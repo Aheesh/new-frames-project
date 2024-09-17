@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { getHyperFrame } from '../../hyperframes';
 import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
-import { DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
+import { BAL_VAULT_ADDR, DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
 import { ethers } from 'ethers';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -59,7 +59,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const tokenIn = DEGEN_ADDR;
   const tokenOut = PLAYER_A_ADDR; //TODO should be based on the option selected
 
-  const value = String(1e18); //TODO get the amount from the user on first frame.
+  const value = String(10e18); //TODO get the amount from the user on first frame.
 
   const swaps = [
     {
@@ -119,7 +119,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     chainId: `eip155:${Network.BASE}`,
     method: 'eth_sendTransaction',
     params: {
-      to: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
+      to: BAL_VAULT_ADDR,
       data: `0x${hexSwapData}`,
       value: '0',
       gasLimit: gasLimit,

@@ -176,11 +176,11 @@ addHyperFrame('approve', {
     state: { frame: 'approve' },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
   }),
-  1: 'approveTx',
+  1: 'txSuccess',
   2: 'start',
 });
 
-addHyperFrame('approveTx', {
+addHyperFrame('txSuccess', {
   frame: getFrameHtmlResponse({
     buttons: [
       {
@@ -194,7 +194,7 @@ addHyperFrame('approveTx', {
       src: `${NEXT_PUBLIC_URL}/desert-lost.webp`,
       aspectRatio: '1:1',
     },
-    state: { frame: 'approveTx' },
+    state: { frame: 'txSuccess' },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
   }),
   1: 'start',
