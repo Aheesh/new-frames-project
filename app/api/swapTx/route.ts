@@ -23,11 +23,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     accountAddress = message.interactor.verified_accounts[0];
     //TODO : get the wallet address from the message
     addresses = message.interactor.verified_accounts;
-    console.log('api/swapTx/route.ts :addresses =>', addresses);
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
   console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
+
+  console.log('api/swapTx/route.ts :addresses =>', addresses);
 
   let state; // = { frame: 'start' };
 
