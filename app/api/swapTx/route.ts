@@ -19,7 +19,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
   if (isValid) {
-    accountAddress = message.interactor.verified_accounts[0];
+    accountAddress = message.interactor.verified_accounts[1];
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
