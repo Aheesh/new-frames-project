@@ -14,7 +14,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
-  let addressesLength = 0;
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -25,8 +24,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Message not valid', { status: 500 });
   }
   console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
-  console.log('api/swapTx/route.ts : message =>', message);
-  console.log('api/swapTx/route.ts : button =>', message.interactor);
+  //console.log('api/swapTx/route.ts : message =>', message);
+  //console.log('api/swapTx/route.ts : button =>', message.interactor);
 
   let state; // = { frame: 'start' };
 
