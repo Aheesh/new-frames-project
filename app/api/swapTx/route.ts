@@ -21,16 +21,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[0];
-    //TODO : get the length of the addresses array
-    addressesLength = message.interactor.verified_accounts.length;
-    //list all addresses
-    const addresses = message.interactor.verified_accounts;
-    console.log('api/swapTx/route.ts :addressesLength =>', addressesLength);
-    console.log('api/swapTx/route.ts :addresses =>', addresses);
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
   console.log('api/swapTx/route.ts :accountAddress =>', accountAddress);
+  console.log('api/swapTx/route.ts : message =>', message);
+  console.log('api/swapTx/route.ts : button =>', message.interactor);
 
   let state; // = { frame: 'start' };
 
