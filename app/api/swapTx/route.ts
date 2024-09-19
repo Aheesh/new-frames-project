@@ -104,7 +104,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       toInternalBalance: false,
     },
     limits: [value, '0'],
-    deadline: Math.ceil(Date.now() / 1000) + 60,
+    deadline: Math.ceil(Date.now() / 1000) + 300,
   });
 
   console.log('encodeBatchSwapData', encodeBatchSwapData);
