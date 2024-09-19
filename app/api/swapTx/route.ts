@@ -14,12 +14,16 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
+  let addresses: string[] = [];
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[0];
+    //TODO : get the wallet address from the message
+    addresses = message.interactor.verified_accounts;
+    console.log('api/swapTx/route.ts :addresses =>', addresses);
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
