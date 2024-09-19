@@ -62,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const tokenIn = DEGEN_ADDR;
   const tokenOut = PLAYER_A_ADDR; //TODO should be based on the option selected
 
-  const value = String(10e18); //TODO get the amount from the user on first frame.
+  const value = String(1e18); //TODO get the amount from the user on first frame.
 
   const swaps = [
     {
