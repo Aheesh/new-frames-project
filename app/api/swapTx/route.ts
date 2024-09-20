@@ -2,24 +2,26 @@
 
 import dotenv from 'dotenv';
 dotenv.config();
-import { NextRequest, NextResponse } from 'next/server';
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
-import { getHyperFrame } from '../../hyperframes';
+import { NextRequest, NextResponse } from 'next/server.js';
+import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { BalancerSDK, Network, SwapType, Swaps } from '@balancer-labs/sdk';
-import { BAL_VAULT_ADDR, DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config';
+import { BAL_VAULT_ADDR, DEGEN_ADDR, PLAYER_A_ADDR, POOL_ID } from '../../config.js';
 import { ethers } from 'ethers';
+
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/swapTx/route.ts : Swap Tx endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
+  let walletAddress: string = '';
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[1];
+    walletAddress = message.address || '';
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
@@ -99,8 +101,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
     funds: {
       fromInternalBalance: false,
-      recipient: accountAddress,
-      sender: accountAddress,
+      recipient: walletAddress,
+      sender: walletAddress,
       toInternalBalance: false,
     },
     limits: [value, '0'],
