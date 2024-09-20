@@ -1,6 +1,6 @@
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
-import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
+import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
+import { NextRequest, NextResponse } from 'next/server.js';
+import { NEXT_PUBLIC_URL } from '../../config.js';
 import { addHyperFrame, getHyperFrame } from '../../hyperframes.js';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
