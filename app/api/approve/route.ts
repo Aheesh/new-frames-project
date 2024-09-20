@@ -1,7 +1,7 @@
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
-import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../config';
-import { addHyperFrame, getHyperFrame } from '../../hyperframes.js';
+import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
+import { NextRequest, NextResponse } from 'next/server.js';
+
+import { getHyperFrame } from '../../hyperframes.js';
 
 // addHyperFrame('approve', {
 //   frame: getFrameHtmlResponse({
