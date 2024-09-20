@@ -1,5 +1,5 @@
-import { getFrameHtmlResponse } from '@coinbase/onchainkit';
-import { NEXT_PUBLIC_URL } from './config';
+import { getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
+import { NEXT_PUBLIC_URL } from './config.js';
 
 export type HyperFrame = {
   frame: string;

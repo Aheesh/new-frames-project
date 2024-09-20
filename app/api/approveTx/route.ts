@@ -4,21 +4,23 @@
 // Player A / B / Draw from message.state
 // tx to approve DEGEN token transfer and spend
 
-import { NextRequest, NextResponse } from 'next/server';
-import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
-import { NEXT_PUBLIC_URL } from '../../config';
-import { addHyperFrame, getHyperFrame } from '../../hyperframes';
+import { NextRequest, NextResponse } from 'next/server.js';
+//import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
+import('@coinbase/onchainkit/frame');
+import { NEXT_PUBLIC_URL } from '../../config.js';
+import { addHyperFrame, getHyperFrame } from '../../hyperframes.js';
 import { encodeFunctionData, parseUnits } from 'viem';
-import abi from '../../_contracts/degen';
-import { BAL_VAULT_ADDR, DEGEN_ADDR } from '../../config';
-import { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
+import abi from '../../_contracts/degen.js';
+import { BAL_VAULT_ADDR, DEGEN_ADDR } from '../../config.js';
 import { base } from 'viem/chains';
+import { FrameRequest, getFrameMessage, FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/approvetx/route.ts : Approve endpoint');
 
   let accountAddress: string | undefined = '';
   let text: string | undefined = '';
+  let walletAddress: string = '';
 
   const body: FrameRequest = await req.json();
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' });
@@ -26,9 +28,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   if (isValid) {
     accountAddress = message.interactor.verified_accounts[0];
+    walletAddress = message.address || '';
   } else {
     return new NextResponse('Message not valid', { status: 500 });
   }
+  console.log('api/approveTx/route.ts : walletAddress =>', walletAddress);
 
   let state; // = { frame: 'start' };
 

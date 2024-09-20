@@ -1,7 +1,7 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEXT_PUBLIC_URL } from '../../config';
-import { addHyperFrame, getHyperFrame } from '../../hyperframes';
+import { addHyperFrame, getHyperFrame } from '../../hyperframes.js';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   console.log('api/frame/route.ts : Base Frame endpoint');
